@@ -1051,16 +1051,20 @@ var ModalOverlay = (function (_super) {
         };
         if (isDoc) {
             this.dialogRef.onDestroy.subscribe(function () {
+                const containers = document.getElementsByTagName('bs-modal-container');
+                const container = containers[containers.length - 1];
                 element.removeEventListener('click', elListener, false);
                 element.removeEventListener('touchstart', elListener, false);
-                document.removeEventListener('click', docListener, false);
-                document.removeEventListener('touchend', docListener, false);
+                container.removeEventListener('click', docListener, false);
+                container.removeEventListener('touchend', docListener, false);
             });
             setTimeout(function () {
+                const containers = document.getElementsByTagName('bs-modal-container');
+                const container = containers[containers.length - 1];
                 element.addEventListener('mousedown', elListener, false);
                 element.addEventListener('touchstart', docListener, false);
-                document.addEventListener('click', docListener, false);
-                document.addEventListener('touchend', docListener, false);
+                container.addEventListener('click', docListener, false);
+                container.addEventListener('touchend', docListener, false);
             });
         }
     };
